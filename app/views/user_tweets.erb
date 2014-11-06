@@ -1,0 +1,28 @@
+<div class="container">
+	<h1> <%= @username %> </h1>
+	<div id="wait-msg">
+		<img src="/gifs/ajax-loader.gif"> Updating</img>
+	</div>
+	<div id="tweets">
+	 <%= erb :'_partials/_tweet_container' %>
+	</div>
+</div>
+
+<script>
+	$(function(){
+		$.ajax({
+			type: "POST",
+      url: "/<%= params[:username] %>/stale",
+      cache: false,
+      success: function(value){
+        $("#tweets").html(value);
+        $("#wait-msg").html("");     
+      },
+      error: function(value){
+      	$("#wait-msg").html("");
+      } 
+     });
+		
+	});
+
+</script>
