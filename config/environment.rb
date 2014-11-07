@@ -37,8 +37,8 @@ require APP_ROOT.join('config', 'database')
 API_KEYS = YAML::load(File.open('config/secret.yaml'))
 
 $client = Twitter::REST::Client.new do |config|
-  config.consumer_key        = API_KEYS["consumer_key_id"]
-  config.consumer_secret     = API_KEYS["consumer_secret_key_id"]
+  config.consumer_key        = API_KEYS["twitter_consumer_key_id"]
+  config.consumer_secret     = API_KEYS["twitter_consumer_secret_key_id"]
   config.access_token        = API_KEYS["access_token"]
   config.access_token_secret = API_KEYS["access_token_secret"]
   end

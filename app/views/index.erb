@@ -3,4 +3,38 @@
     <input type="text" name="username">
     <input type="submit" value="Get Tweets">
   </form>
+
+  <form action="/tweets" id="send-tweet" method="post">
+    <input type="text" name="body">
+    <input id="button" type="submit" value="Post Tweets">
+  </form>
+
+  <div id="status">
+  </div>
 </div>
+
+<script>
+	$(function(){
+
+		$('#send-tweet').one("submit", function(event){
+			event.preventDefault();
+			$('#button').attr('disabled', 'disabled');
+			$("#status").append("<img src='/gifs/ajax-loader.gif'>Posting</img>")
+			$.ajax({
+				type: "POST",
+	      url: "/tweets",
+	      data: $("#send-tweet").serialize(),
+	      cache: false,
+	      success: function(value){
+
+	      	
+	        $("#status").html("<h1>Tweet Posted!</h1>");
+	      },
+	      error: function(value){
+	      	$("#status").html("Tweet Failed!");
+	      } 
+	     });
+		});		
+	});
+
+</script>
